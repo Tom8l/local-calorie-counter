@@ -1,0 +1,34 @@
+
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+#food-form {
+    width: 20%;
+}
+
+#food-form > div {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+#food-form > div > label {
+    flex: 0 0 100px;
+}
+
+#food-form > div > input,
+#food-form > div > select {
+    flex: 1;
+}
+
+
+#add-food-button {
+    text-align: center;
+    margin-top: 15px;
+}
