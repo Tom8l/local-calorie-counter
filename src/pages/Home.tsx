@@ -1,3 +1,4 @@
+import styles from "./Home.module.css"
 import { getToday } from "../utils/date";
 import { useEntries } from "../hooks/useEntries";
 import { Link } from "react-router";
@@ -33,13 +34,13 @@ export function Home() {
     return (
         <>
 
-      <div id="main-container">
+      <div className={styles.mainContainer}>
 
         <div>
           <h1> Today's date: {getToday()} </h1>
         </div>
 
-        <div id="add-entry">
+        <div className={styles.buttonContainer}>
             <Link to="/add-entry">
                 <button>Add Entry</button>
             </Link>

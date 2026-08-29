@@ -1,6 +1,6 @@
 
 
-#main-container {
+.mainContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,27 +8,27 @@
 
 
 
-#food-form {
+.foodForm {
     width: 20%;
 }
 
-#food-form > div {
+.foodForm > div {
     display: flex;
     justify-content: center;
     margin-top: 5px;
 }
 
-#food-form > div > label {
+.foodForm > div > label {
     flex: 0 0 100px;
 }
 
-#food-form > div > input,
-#food-form > div > select {
+.foodForm > div > input,
+.foodForm > div > select {
     flex: 1;
 }
 
 
-#add-food-button {
+.addFoodButton {
     text-align: center;
     margin-top: 15px;
 }

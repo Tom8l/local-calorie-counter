@@ -1,4 +1,4 @@
-import "./AddFood.css"
+import styles from "./AddFood.module.css"
 import { addFood, deleteFood } from "../db/foods";
 import { useFoods } from "../hooks/useFoods";
 import type { Food } from "../types";
@@ -61,9 +61,9 @@ export function AddFood() {
 
     return (
         <>
-        <div id="main-container">
+        <div className={styles.mainContainer}>
 
-            <form onSubmit={handleSubmit} id="food-form">
+            <form onSubmit={handleSubmit} className={styles.foodForm}>
 
                 <div> Food Form </div>
 
@@ -105,7 +105,7 @@ export function AddFood() {
                 </div>
 
                 <div>
-                    <button type="submit" id="add-food-button">Add Food to Database</button>
+                    <button type="submit" className="addFoodButton">Add Food to Database</button>
                 </div>
                 
 
@@ -116,8 +116,7 @@ export function AddFood() {
                 <div>All Foods</div>
 
                 {foods.map(food => (
-
-                    <div>
+                    <div key={food.id}>
                         {food.name}, {food.servingSize} {food.servingUnit} | {food.calories} kcal - {food.protein} P - {food.fat} F - {food.carbs} C <button onClick={() => handleFoodDeletion(food)}> Delete </button>
                     </div>
 

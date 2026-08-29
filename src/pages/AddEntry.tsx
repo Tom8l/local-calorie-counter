@@ -4,7 +4,7 @@ import { getFoods } from "../db/foods";
 import { addEntry } from "../db/entries";
 import { getToday } from "../utils/date";
 import { useFoods } from "../hooks/useFoods";
-import "./AddEntry.css"
+import styles from "./AddEntry.module.css"
 
 
 
@@ -43,14 +43,20 @@ export function AddEntry() {
     return (
         <>
             {}
-            <div>
-                {foods.map(food => (
+            <div className={`${styles.mainContainer}`}>
 
-                    <div>
-                        {food.name}, {food.servingSize} {food.servingUnit} <button onClick={() => handleEntry(food)}> Add </button>
-                    </div>
-                    
+                <div className={styles.foodListText}>
+                    Foods:
+                </div>
+
+                <div>
+                    {foods.map(food => (
+                        <div>
+                            {food.name}, {food.servingSize} {food.servingUnit} <button onClick={() => handleEntry(food)}> Add </button>
+                        </div>
                 ))}
+                </div>
+
             </div>
         </>
     );

@@ -7,7 +7,7 @@ interface CalorieTrackerDB extends DBSchema {
         key: string;
         value: Food;
         indexes: {
-            "by-name": string;
+            "by-name-brand": [string, string];
         };
     };
 
@@ -22,14 +22,14 @@ interface CalorieTrackerDB extends DBSchema {
 
 export const dbPromise = openDB<CalorieTrackerDB>(
     "calorie-tracker-db",
-    1,
+    2,
     {
         upgrade(db) {
             const foods = db.createObjectStore("foods", {
                 keyPath: "id",
             });
 
-            foods.createIndex("by-name", "name");
+            foods.createIndex("by-name-brand", ["name", "brand"], { unique: true });
 
             const entries = db.createObjectStore("entries", {
                 keyPath: "id",
