@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { Food } from "../types";
 import { getFoods } from "../db/foods";
 import { addEntry } from "../db/entries";
-import { getToday } from "../utils/date";
+import { generateDate } from "../utils/date";
 import { useFoods } from "../hooks/useFoods";
 import styles from "./AddEntry.module.css"
 
@@ -19,7 +19,7 @@ export function AddEntry() {
 
         const entry = {
             id: crypto.randomUUID(),
-            date: getToday(),
+            date: generateDate(0),
 
             foodId: food.id,
             foodName: food.name,
@@ -51,7 +51,7 @@ export function AddEntry() {
 
                 <div>
                     {foods.map(food => (
-                        <div>
+                        <div key={food.id}>
                             {food.name}, {food.servingSize} {food.servingUnit} <button onClick={() => handleEntry(food)}> Add </button>
                         </div>
                 ))}

@@ -6,6 +6,13 @@
   gap: 10px;
 }
 
+.dateContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+
 .buttonContainer {
   display: flex;
   gap: 5px;

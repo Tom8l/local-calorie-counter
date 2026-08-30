@@ -1,13 +1,17 @@
 import styles from "./Home.module.css"
-import { getToday } from "../utils/date";
+import { generateDate, shiftDateString } from "../utils/date";
 import { useEntries } from "../hooks/useEntries";
 import { Link } from "react-router";
 import type { Entry } from "../types";
 import { deleteEntry } from "../db/entries";
+import { useState } from "react";
+import leftArrowIcon from "../assets/left-arrow-svgrepo.svg";
+import rightArrowIcon from "../assets/right-arrow-svgrepo.svg";
 
 export function Home() {
+    const [date, setDate] = useState<string>(generateDate(0));
 
-    const {entries, reloadEntries} = useEntries(getToday());
+    const {entries, reloadEntries} = useEntries(date);
 
     const handleDeletion = async (entry: Entry) => {
         await deleteEntry(entry.id);
@@ -31,13 +35,28 @@ export function Home() {
 
     const totals = calculateTotalMacros(entries);
 
+
+    const handlePreviousDate = () => {
+      const prevDateString = shiftDateString(date, -1);
+        setDate(prevDateString);
+    }
+
+    const handleNextDate = () => {
+        const newDateString = shiftDateString(date, 1);
+        setDate(newDateString);
+    }
+
+
+
     return (
         <>
 
       <div className={styles.mainContainer}>
 
-        <div>
-          <h1> Today's date: {getToday()} </h1>
+        <div className={styles.dateContainer}>
+          <img src={leftArrowIcon} width={50} height={50} onClick={handlePreviousDate}/>
+          <h1> Date: {date} </h1>
+          <img src={rightArrowIcon} width={50} height={50} onClick={handleNextDate}/>
         </div>
 
         <div className={styles.buttonContainer}>
