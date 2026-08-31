@@ -14,8 +14,14 @@ export function Home() {
     const {entries, reloadEntries} = useEntries(date);
 
     const handleDeletion = async (entry: Entry) => {
-        await deleteEntry(entry.id);
-        reloadEntries();
+
+        const confirmed = window.confirm("Really delete food from diary?");
+
+        if (confirmed) {
+          await deleteEntry(entry.id);
+          reloadEntries();
+        }
+        
     };
 
     function calculateTotalMacros(entries: Entry[]) {

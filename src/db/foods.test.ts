@@ -23,6 +23,20 @@ describe("foods", () => {
         source: "custom" as const,   
     }
 
+    const cheese1 = {
+        id: crypto.randomUUID(),
+        name: "Cheese",
+        brand: "The Cheese Factory",
+        calories: 170,
+        protein: 10,
+        fat: 10,
+        carbs: 10,
+        servingSize: 100,
+        servingUnit: "g" as const,
+        createdAt: Date.now(),
+        source: "custom" as const,      
+    }
+
     it("adds a food to the database", async () => {
         await addFood(potato);
 
@@ -69,7 +83,7 @@ describe("foods", () => {
         const food = await getFood("food-that-does-not-exist");
 
         expect(food).toBeUndefined();
-    })
+    });
 
     it ("updates a food", async () => {
         await addFood(potato);
@@ -84,5 +98,15 @@ describe("foods", () => {
         expect(foods).toHaveLength(1);
         expect(foods[0].name).toBe("Potato");
         expect(foods[0].calories).toBe(110);
+    });
+
+    it ("tries to add two of the same food and brand combination", async () => {
+        await addFood(cheese1);
+        await addFood(cheese1);
+
+        const foods = await getFoods();
+
+        expect(foods).toHaveLength(1);
+
     });
 });

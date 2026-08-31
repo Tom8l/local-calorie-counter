@@ -54,8 +54,13 @@ export function AddFood() {
 
 
     const handleFoodDeletion = async (food: Food) => {
-        await deleteFood(food.id);
-        reloadFoods();
+
+        const confirmed = window.confirm("Really delete this food?");
+
+        if (confirmed) {
+            await deleteFood(food.id);
+            reloadFoods();
+        }
     }
 
 
@@ -113,11 +118,11 @@ export function AddFood() {
 
             <div>
 
-                <div>All Foods</div>
+                <div>{foods.length != 0 ? `All Foods` : `No foods yet, go ahead and add one!`}</div>
 
                 {foods.map(food => (
                     <div key={food.id}>
-                        {food.name}, {food.servingSize} {food.servingUnit} | {food.calories} kcal - {food.protein} P - {food.fat} F - {food.carbs} C <button onClick={() => handleFoodDeletion(food)}> Delete </button>
+                        {food.brand != null ? `${food.name} - ${food.brand},` : `${food.name},`} {food.servingSize} {food.servingUnit} | {food.calories} kcal - {food.protein} P - {food.fat} F - {food.carbs} C <button onClick={() => handleFoodDeletion(food)}> Delete </button>
                     </div>
 
                 ))}

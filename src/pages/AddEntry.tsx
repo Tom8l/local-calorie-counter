@@ -5,21 +5,24 @@ import { addEntry } from "../db/entries";
 import { generateDate } from "../utils/date";
 import { useFoods } from "../hooks/useFoods";
 import styles from "./AddEntry.module.css"
-
+import { useNavigate } from "react-router";
 
 
 
 export function AddEntry() {
 
     const {foods, reloadFoods} = useFoods();
+    const navigate = useNavigate();
 
+    const [servings, setServings] = useState<Record<string, number>>({});
+    const [dates, setDates] = useState<Record<string, string>>({});
 
     const handleEntry = async (food: Food) => {
-        const quantity = 1;
+        const quantity = servings[food.id] || 1;
 
         const entry = {
             id: crypto.randomUUID(),
-            date: generateDate(0),
+            date: dates[food.id] || generateDate(0),
 
             foodId: food.id,
             foodName: food.name,
@@ -36,7 +39,12 @@ export function AddEntry() {
         };
 
         await addEntry(entry);
-        alert("Entry added.")
+
+        const confirmed = window.confirm("Entry added. Return to food diary?");
+
+        if (confirmed) {
+            navigate("/");
+        }
 
     };
 
@@ -52,7 +60,31 @@ export function AddEntry() {
                 <div>
                     {foods.map(food => (
                         <div key={food.id}>
-                            {food.name}, {food.servingSize} {food.servingUnit} <button onClick={() => handleEntry(food)}> Add </button>
+                            {food.brand != null ? `${food.name} - ${food.brand},` : `${food.name},`} {food.servingSize} {food.servingUnit}
+                            <input
+                                type="number"
+                                min="0.25"
+                                step="0.25"
+                                value={servings[food.id] ?? 1}
+                                onChange={(e) =>
+                                    setServings({
+                                        ...servings,
+                                        [food.id]: Number(e.target.value),
+                                    })
+                                }
+                            />
+
+                            <input
+                                type="date"
+                                value={dates[food.id] ?? generateDate(0)}
+                                onChange={(e) =>
+                                    setDates({
+                                        ...dates,
+                                        [food.id]: e.target.value,
+                                    })
+                                }
+                            />
+                            <button onClick={() => handleEntry(food)}> Add </button>
                         </div>
                 ))}
                 </div>

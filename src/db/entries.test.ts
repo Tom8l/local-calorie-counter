@@ -33,9 +33,7 @@ describe("entries", () => {
     it("adds an entry", async () => {
         await addEntry(potatoEntry);
         
-
         const entries = await getEntries();
-        console.log(entries);
 
         expect(entries).toHaveLength(1);
         expect(entries[0].foodName).toBe("Potato");
