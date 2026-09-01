@@ -2,27 +2,28 @@ import { useEffect, useState } from "react";
 import type { Food } from "../types";
 import { getFoods } from "../db/foods";
 import { addEntry } from "../db/entries";
-import { generateDate } from "../utils/date";
+import { generateDate, shiftDateString } from "../utils/date";
 import { useFoods } from "../hooks/useFoods";
 import styles from "./AddEntry.module.css"
-import { useNavigate } from "react-router";
-
+import { useNavigate, useLocation } from "react-router";
+import leftArrowIcon from "../assets/left-arrow-svgrepo.svg";
+import rightArrowIcon from "../assets/right-arrow-svgrepo.svg";
 
 
 export function AddEntry() {
-
+    const location = useLocation();
+    const [date, setDate] = useState<string>(location.state?.date ?? generateDate(0));
     const {foods, reloadFoods} = useFoods();
     const navigate = useNavigate();
 
     const [servings, setServings] = useState<Record<string, number>>({});
-    const [dates, setDates] = useState<Record<string, string>>({});
 
     const handleEntry = async (food: Food) => {
         const quantity = servings[food.id] || 1;
 
         const entry = {
             id: crypto.randomUUID(),
-            date: dates[food.id] || generateDate(0),
+            date: date || generateDate(0),
 
             foodId: food.id,
             foodName: food.name,
@@ -40,7 +41,7 @@ export function AddEntry() {
 
         await addEntry(entry);
 
-        const confirmed = window.confirm("Entry added. Return to food diary?");
+        const confirmed = window.confirm("Entry added!\n\nReturn to food diary?");
 
         if (confirmed) {
             navigate("/");
@@ -48,10 +49,33 @@ export function AddEntry() {
 
     };
 
+    const handlePreviousDate = () => {
+        const prevDateString = shiftDateString(date, -1);
+        setDate(prevDateString);
+    }
+
+    const handleNextDate = () => {
+        const newDateString = shiftDateString(date, 1);
+        setDate(newDateString);
+    }
+
+    const handleTodayButton = () => {
+        setDate(generateDate(0));
+    }
+
     return (
         <>
-            {}
+            <div>Back</div>
+
             <div className={`${styles.mainContainer}`}>
+
+                <div className={styles.dateContainer}>
+                    <img src={leftArrowIcon} width={50} height={50} onClick={handlePreviousDate}/>
+                    <h1> Date: {date} </h1>
+                    <img src={rightArrowIcon} width={50} height={50} onClick={handleNextDate}/>
+                </div>
+
+                <button onClick={handleTodayButton}>Today</button>
 
                 <div className={styles.foodListText}>
                     Foods:
@@ -74,16 +98,6 @@ export function AddEntry() {
                                 }
                             />
 
-                            <input
-                                type="date"
-                                value={dates[food.id] ?? generateDate(0)}
-                                onChange={(e) =>
-                                    setDates({
-                                        ...dates,
-                                        [food.id]: e.target.value,
-                                    })
-                                }
-                            />
                             <button onClick={() => handleEntry(food)}> Add </button>
                         </div>
                 ))}

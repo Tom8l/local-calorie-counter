@@ -52,6 +52,10 @@ export function Home() {
         setDate(newDateString);
     }
 
+    const handleTodayButton = () => {
+        setDate(generateDate(0));
+    }
+
 
 
     return (
@@ -65,8 +69,10 @@ export function Home() {
           <img src={rightArrowIcon} width={50} height={50} onClick={handleNextDate}/>
         </div>
 
+        <button onClick={handleTodayButton}>Today</button>
+
         <div className={styles.buttonContainer}>
-            <Link to="/add-entry">
+            <Link to="/add-entry" state={{ date }}>
                 <button>Add Entry</button>
             </Link>
             <Link to="/add-food">

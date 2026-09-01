@@ -6,6 +6,12 @@
     gap: 6px;
 }
 
+.dateContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .foodListText {
     font-weight: bold;
 }
