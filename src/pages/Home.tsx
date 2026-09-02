@@ -3,7 +3,7 @@ import { generateDate, shiftDateString } from "../utils/date";
 import { useEntries } from "../hooks/useEntries";
 import { Link } from "react-router";
 import type { Entry } from "../types";
-import { deleteEntry } from "../db/entries";
+import { deleteEntry, exportEntries, importEntries } from "../db/entries";
 import { useState } from "react";
 import leftArrowIcon from "../assets/left-arrow-svgrepo.svg";
 import rightArrowIcon from "../assets/right-arrow-svgrepo.svg";
@@ -56,6 +56,39 @@ export function Home() {
         setDate(generateDate(0));
     }
 
+    const handleExport = async () => {
+      const json = await exportEntries();
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `calorie-counter-entries-${generateDate(0)}.json`;
+      link.click();
+
+      URL.revokeObjectURL(url);
+    }
+
+    const handleImport = async (
+      event: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+      const file = event.target.files?.[0];
+
+      if (!file) {
+        return;
+      }
+
+      try {
+        const json = await file.text();
+        const count = await importEntries(json);
+
+        window.alert(`Imported ${count} entries.`);
+        reloadEntries();
+      } catch {
+        window.alert("Could not import this file.");
+      }
+    }
+
 
 
     return (
@@ -64,9 +97,9 @@ export function Home() {
       <div className={styles.mainContainer}>
 
         <div className={styles.dateContainer}>
-          <img src={leftArrowIcon} width={50} height={50} onClick={handlePreviousDate}/>
+          <img src={leftArrowIcon} width={50} height={50} className={styles.previousDateArrow} onClick={handlePreviousDate}/>
           <h1> Date: {date} </h1>
-          <img src={rightArrowIcon} width={50} height={50} onClick={handleNextDate}/>
+          <img src={rightArrowIcon} width={50} height={50} className={styles.nextDateArrow} onClick={handleNextDate}/>
         </div>
 
         <button onClick={handleTodayButton}>Today</button>
@@ -105,6 +138,21 @@ export function Home() {
         <div>
           Carbs: {totals.carbs}
         </div>
+
+        <div>
+          <button onClick={handleExport}>Export Entries</button>
+
+          <label>
+            Import Entries
+            <input
+              type="file"
+              accept="application/json,.json"
+              onChange={handleImport}
+            />
+          </label>
+        </div>
+
+
 
       </div>
 
