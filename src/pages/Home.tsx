@@ -7,6 +7,7 @@ import { deleteEntry, exportEntries, importEntries } from "../db/entries";
 import { useState } from "react";
 import leftArrowIcon from "../assets/left-arrow-svgrepo.svg";
 import rightArrowIcon from "../assets/right-arrow-svgrepo.svg";
+import { Button } from "../components/Button";
 
 export function Home() {
     const [date, setDate] = useState<string>(generateDate(0));
@@ -152,6 +153,11 @@ export function Home() {
           </label>
         </div>
 
+          <div>
+            <Button variant="primary">
+              test
+            </Button>
+          </div>
 
 
       </div>
