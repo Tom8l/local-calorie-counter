@@ -26,3 +26,7 @@
 .nextDateArrow {
   cursor: pointer;
 }
+
+.macroContainer {
+  display: flex;
+}

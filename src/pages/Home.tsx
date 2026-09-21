@@ -107,11 +107,36 @@ export function Home() {
 
         <div className={styles.buttonContainer}>
             <Link to="/add-entry" state={{ date }}>
-                <button>Add Entry</button>
+              <Button>Add Entry</Button>
             </Link>
             <Link to="/add-food">
-                <button>Add Food</button>
+              <Button>Add Food</Button>
             </Link>
+        </div>
+
+        <div className="dailyCaloriesText">
+          Calories
+          <br/>
+          {totals.calories} kcal
+        </div>
+        <div className={styles.buttonContainer}>
+          <div>
+            Protein
+            <br/>
+            {totals.protein} g
+          </div>
+
+          <div>
+            Fat
+            <br/>
+            {totals.fat} g
+          </div>
+
+          <div>
+          Carbs
+          <br/>
+          {totals.carbs} g
+          </div>
         </div>
 
         <div id="entries">
@@ -120,24 +145,10 @@ export function Home() {
               <strong>{entry.foodName}</strong>
 
               <div>
-                {entry.quantity} {entry.servingUnit} <button onClick={() => handleDeletion(entry)}> Delete </button>
+                {entry.quantity} {entry.servingUnit} <Button variant="danger" size="sm" onClick={() => handleDeletion(entry)}> Delete </Button>
               </div>
             </div>
           ))}
-        </div>
-
-
-        <div>
-          Calories: {totals.calories}
-        </div>
-        <div>
-          Protein: {totals.protein}
-        </div>
-        <div>
-          Fat: {totals.fat}
-        </div>
-        <div>
-          Carbs: {totals.carbs}
         </div>
 
         <div>
@@ -155,7 +166,7 @@ export function Home() {
 
           <div>
             <Button variant="primary">
-              test
+              +
             </Button>
           </div>
 
