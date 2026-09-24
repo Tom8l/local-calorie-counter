@@ -4,15 +4,23 @@ import { useEntries } from "../hooks/useEntries";
 import { Link } from "react-router";
 import type { Entry } from "../types";
 import { deleteEntry, exportEntries, importEntries } from "../db/entries";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import leftArrowIcon from "../assets/left-arrow-svgrepo.svg";
 import rightArrowIcon from "../assets/right-arrow-svgrepo.svg";
 import { Button } from "../components/Button";
 
-export function Home() {
-    const [date, setDate] = useState<string>(generateDate(0));
+type HomeProps = {
+  entriesVersion: number;
+};
 
-    const {entries, reloadEntries} = useEntries(date);
+export function Home({ entriesVersion }: HomeProps) {
+    const [date, setDate] = useState<string>(generateDate(0));
+    const {entries, reloadEntries} = useEntries(date, entriesVersion);
+
+    const dateInputRef = useRef<HTMLInputElement>(null);
+    const openDatePicker = () => {
+      dateInputRef.current?.showPicker();
+    }
 
     const handleDeletion = async (entry: Entry) => {
 
@@ -57,41 +65,6 @@ export function Home() {
         setDate(generateDate(0));
     }
 
-    const handleExport = async () => {
-      const json = await exportEntries();
-      const blob = new Blob([json], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `calorie-counter-entries-${generateDate(0)}.json`;
-      link.click();
-
-      URL.revokeObjectURL(url);
-    }
-
-    const handleImport = async (
-      event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-      const file = event.target.files?.[0];
-
-      if (!file) {
-        return;
-      }
-
-      try {
-        const json = await file.text();
-        const count = await importEntries(json);
-
-        window.alert(`Imported ${count} entries.`);
-        reloadEntries();
-      } catch {
-        window.alert("Could not import this file.");
-      }
-    }
-
-
-
     return (
         <>
 
@@ -99,19 +72,18 @@ export function Home() {
 
         <div className={styles.dateContainer}>
           <img src={leftArrowIcon} width={50} height={50} className={styles.previousDateArrow} onClick={handlePreviousDate}/>
-          <h1> Date: {date} </h1>
+            <label htmlFor="date-picker" style={{cursor: "pointer"}} onClick={openDatePicker}>
+              <h1> {date} </h1>
+            </label>
+            <input ref={dateInputRef} id="date-picker" type="date" value={date} style={{display: "none"}} onChange={(event) => setDate(event.target.value)}/>
           <img src={rightArrowIcon} width={50} height={50} className={styles.nextDateArrow} onClick={handleNextDate}/>
         </div>
-
-        <button onClick={handleTodayButton}>Today</button>
 
         <div className={styles.buttonContainer}>
             <Link to="/add-entry" state={{ date }}>
               <Button>Add Entry</Button>
             </Link>
-            <Link to="/add-food">
-              <Button>Add Food</Button>
-            </Link>
+
         </div>
 
         <div className="dailyCaloriesText">
@@ -150,26 +122,6 @@ export function Home() {
             </div>
           ))}
         </div>
-
-        <div>
-          <button onClick={handleExport}>Export Entries</button>
-
-          <label>
-            Import Entries
-            <input
-              type="file"
-              accept="application/json,.json"
-              onChange={handleImport}
-            />
-          </label>
-        </div>
-
-          <div>
-            <Button variant="primary">
-              +
-            </Button>
-          </div>
-
 
       </div>
 

@@ -65,7 +65,6 @@ export function AddEntry() {
 
     return (
         <>
-            <div>Back</div>
 
             <div className={`${styles.mainContainer}`}>
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { Entry } from "../types";
 import { getEntriesByDate } from "../db/entries";
 
-export function useEntries(date: string) {
+export function useEntries(date: string, entriesVersion: number) {
     const [entries, setEntries] = useState<Entry[]>([]);
     const [reloadKey, setReloadKey] = useState(0);
 
