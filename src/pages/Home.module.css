@@ -30,11 +30,33 @@
   cursor: pointer;
 }
 
-
 .nextDateArrow {
   cursor: pointer;
 }
 
+
+.caloriesContainer {
+  text-align: center;
+}
+
+.caloriesLabel {
+  font-size: large;
+}
+
+.caloriesKcal {
+  font-size: xx-large;
+}
+
 .macroContainer {
   display: flex;
+  gap: 50px;
+  text-align: center;
+}
+
+.macroLabel {
+  color: grey;
+}
+
+.macroGrams {
+  font-weight: 600;
 }

@@ -86,28 +86,41 @@ export function Home({ entriesVersion }: HomeProps) {
 
         </div>
 
-        <div className="dailyCaloriesText">
-          Calories
-          <br/>
-          {totals.calories} kcal
+        <div className={styles.caloriesContainer}>
+          <div className={styles.caloriesLabel}>
+            Calories
+          </div>
+          <div className={styles.caloriesKcal}>
+            {totals.calories} kcal
+          </div>
         </div>
-        <div className={styles.buttonContainer}>
+        <div className={styles.macroContainer}>
           <div>
-            Protein
-            <br/>
-            {totals.protein} g
+            <div className={styles.macroLabel}>
+              Protein
+            </div>
+            <div className={styles.macroGrams}>
+              {totals.protein} g
+            </div>
           </div>
 
           <div>
-            Fat
-            <br/>
-            {totals.fat} g
+            <div className={styles.macroLabel}>
+              Fat
+            </div>
+            <div className={styles.macroGrams}>
+              {totals.fat} g
+            </div>
           </div>
 
           <div>
-          Carbs
-          <br/>
-          {totals.carbs} g
+            <div className={styles.macroLabel}>
+              Carbs
+            </div>
+            <div className={styles.macroGrams}>
+              {totals.carbs} g
+            </div>
+
           </div>
         </div>
 
