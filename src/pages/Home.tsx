@@ -126,17 +126,25 @@ export function Home({ entriesVersion }: HomeProps) {
 
         <div id="entries" className={styles.entryContainer}>
           <ul>
-            {entries.map(entry => (
+            {entries.length === 0 ? (
+              <li className={styles.emptyDiaryMsg}>
+                No diary entries yet. Click "Add Entry" above to get started!
+              </li>) :
+            (entries.map(entry => (
               <li>
                 <div key={entry.id}>
-                  <strong>{entry.foodName}</strong>
-
-                  <div>
-                    {entry.quantity} {entry.servingUnit} <Button variant="danger" size="sm" onClick={() => handleDeletion(entry)}> Delete </Button>
+                  <div className={styles.entryDetails}>
+                    <strong>{entry.foodName}</strong>
+                    <div>
+                      {entry.quantity} {entry.servingUnit} 
+                    </div>
                   </div>
+                 
+                  <Button className={styles.entryDeleteBtn} variant="danger" size="sm" onClick={() => handleDeletion(entry)}> Delete </Button>
+                  
                 </div>
               </li>
-            ))}
+            )))}
           </ul>
         </div>
       </div>
