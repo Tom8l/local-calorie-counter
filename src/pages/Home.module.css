@@ -35,8 +35,26 @@
 }
 
 
+.entryContainer ul {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 500px;
+}
+
+.entryContainer li {
+  list-style-type: none;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.entryContainer li:last-child {
+  border-bottom: none;
+}
+
+
 .caloriesContainer {
   text-align: center;
+  padding-bottom: 5px;
 }
 
 .caloriesLabel {

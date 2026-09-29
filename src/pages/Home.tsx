@@ -124,20 +124,22 @@ export function Home({ entriesVersion }: HomeProps) {
           </div>
         </div>
 
-        <div id="entries">
-          {entries.map(entry => (
-            <div key={entry.id}>
-              <strong>{entry.foodName}</strong>
+        <div id="entries" className={styles.entryContainer}>
+          <ul>
+            {entries.map(entry => (
+              <li>
+                <div key={entry.id}>
+                  <strong>{entry.foodName}</strong>
 
-              <div>
-                {entry.quantity} {entry.servingUnit} <Button variant="danger" size="sm" onClick={() => handleDeletion(entry)}> Delete </Button>
-              </div>
-            </div>
-          ))}
+                  <div>
+                    {entry.quantity} {entry.servingUnit} <Button variant="danger" size="sm" onClick={() => handleDeletion(entry)}> Delete </Button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-
       </div>
-
     </>
     )
 }
