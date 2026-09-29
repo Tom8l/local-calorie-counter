@@ -8,6 +8,7 @@ import styles from "./AddEntry.module.css"
 import { useNavigate, useLocation } from "react-router";
 import leftArrowIcon from "../assets/left-arrow-svgrepo.svg";
 import rightArrowIcon from "../assets/right-arrow-svgrepo.svg";
+import { Button } from "../components/Button";
 
 
 export function AddEntry() {
@@ -70,36 +71,52 @@ export function AddEntry() {
 
                 <div className={styles.dateContainer}>
                     <img src={leftArrowIcon} width={50} height={50} onClick={handlePreviousDate}/>
-                    <h1> Date: {date} </h1>
+                    <h1> {date} </h1>
                     <img src={rightArrowIcon} width={50} height={50} onClick={handleNextDate}/>
                 </div>
 
-                <button onClick={handleTodayButton}>Today</button>
-
                 <div className={styles.foodListText}>
-                    Foods:
+                    Foods
                 </div>
 
                 <div>
+                    <ul className={styles.foodList}>
                     {foods.map(food => (
-                        <div key={food.id}>
-                            {food.brand != null ? `${food.name} - ${food.brand},` : `${food.name},`} {food.servingSize} {food.servingUnit}
-                            <input
-                                type="number"
-                                min="0.25"
-                                step="0.25"
-                                value={servings[food.id] ?? 1}
-                                onChange={(e) =>
-                                    setServings({
-                                        ...servings,
-                                        [food.id]: Number(e.target.value),
-                                    })
-                                }
-                            />
+                        <li>
+                            <div key={food.id} className={styles.foodEntry}>
 
-                            <button onClick={() => handleEntry(food)}> Add </button>
-                        </div>
+                                <div className={styles.foodNameAndBrand}>
+                                    <div>{food.name}</div>
+                                    <div className={styles.foodBrandText}>{food.brand != null ? food.brand : ""}</div>
+                                </div>
+
+                                <div className={styles.foodRightElems}>
+
+                                    <div>
+                                        {food.servingSize} {food.servingUnit}
+                                    </div>
+
+                                    <input
+                                        className={styles.foodListInput}
+                                        type="number"
+                                        min="0.25"
+                                        step="0.25"
+                                        value={servings[food.id] ?? 1}
+                                        onChange={(e) =>
+                                            setServings({
+                                                ...servings,
+                                                [food.id]: Number(e.target.value),
+                                            })
+                                        }
+                                    />
+
+                                    <Button className={styles.foodAddBtn} size="sm" onClick={() => handleEntry(food)}> + </Button>
+                                </div>
+
+                            </div>
+                        </li>
                 ))}
+                </ul>
                 </div>
 
             </div>

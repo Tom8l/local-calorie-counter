@@ -17,4 +17,41 @@
 }
 
 
+.foodEntry {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    height: 30px;
+    width: 400px;
+}
 
+.foodList {
+    padding: 0;
+    list-style: none;
+}
+
+
+.foodNameAndBrand li {
+    display: flex;
+    flex-direction: column;
+}
+
+.foodBrandText {
+    font-size: small;
+    color: #777;
+}
+
+.foodListInput {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.foodRightElems {
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+}

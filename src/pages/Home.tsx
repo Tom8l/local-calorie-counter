@@ -100,7 +100,7 @@ export function Home({ entriesVersion }: HomeProps) {
               Protein
             </div>
             <div className={styles.macroGrams}>
-              {totals.protein} g
+              {totals.protein.toFixed(1)} g
             </div>
           </div>
 
@@ -109,7 +109,7 @@ export function Home({ entriesVersion }: HomeProps) {
               Fat
             </div>
             <div className={styles.macroGrams}>
-              {totals.fat} g
+              {totals.fat.toFixed(1)} g
             </div>
           </div>
 
@@ -118,7 +118,7 @@ export function Home({ entriesVersion }: HomeProps) {
               Carbs
             </div>
             <div className={styles.macroGrams}>
-              {totals.carbs} g
+              {totals.carbs.toFixed(1)} g
             </div>
 
           </div>
