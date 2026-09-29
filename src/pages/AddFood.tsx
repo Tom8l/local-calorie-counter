@@ -2,7 +2,7 @@ import styles from "./AddFood.module.css"
 import { addFood, deleteFood } from "../db/foods";
 import { useFoods } from "../hooks/useFoods";
 import type { Food } from "../types";
-
+import { Button } from "../components/Button";
 
 export function AddFood() {
 
@@ -110,7 +110,7 @@ export function AddFood() {
                 </div>
 
                 <div>
-                    <button type="submit" className="addFoodButton">Add Food to Database</button>
+                    <Button type="submit" className="addFoodButton">Add Food</Button>
                 </div>
                 
 
@@ -122,7 +122,7 @@ export function AddFood() {
 
                 {foods.map(food => (
                     <div key={food.id}>
-                        {food.brand != null ? `${food.name} - ${food.brand},` : `${food.name},`} {food.servingSize} {food.servingUnit} | {food.calories} kcal - {food.protein} P - {food.fat} F - {food.carbs} C <button onClick={() => handleFoodDeletion(food)}> Delete </button>
+                        {food.brand != null ? `${food.name} - ${food.brand},` : `${food.name},`} {food.servingSize} {food.servingUnit} | {food.calories} kcal - {food.protein} P - {food.fat} F - {food.carbs} C <Button size="sm" variant="danger" onClick={() => handleFoodDeletion(food)}> Delete </Button>
                     </div>
 
                 ))}

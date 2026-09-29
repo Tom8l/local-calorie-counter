@@ -25,6 +25,7 @@
 .foodForm > div > input,
 .foodForm > div > select {
     flex: 1;
+    border-radius: 10px;
 }
 
 
