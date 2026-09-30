@@ -55,7 +55,7 @@ export function AddFood() {
 
     const handleFoodDeletion = async (food: Food) => {
 
-        const confirmed = window.confirm("Really delete this food?");
+        const confirmed = window.confirm(`Delete ${food.name} from database?`);
 
         if (confirmed) {
             await deleteFood(food.id);
@@ -73,9 +73,9 @@ export function AddFood() {
                 <div> Food Form </div>
 
                 <div>
-                    <label>Name</label>
+                    <label>Name *</label>
                     <input name="name"></input>
-                </div>            
+                </div>
                 <div>
                     <label>Brand</label>
                     <input name="brand"></input>
@@ -112,20 +112,37 @@ export function AddFood() {
                 <div>
                     <Button type="submit" className="addFoodButton">Add Food</Button>
                 </div>
-                
-
             </form>
 
             <div>
+                <div className={styles.foodDbMsg}>{foods.length != 0 ? `Your Foods` : `No foods yet, go ahead and add one!`}</div>
 
-                <div>{foods.length != 0 ? `All Foods` : `No foods yet, go ahead and add one!`}</div>
+                <ul className={styles.foodList}>
+                    
+                    {foods.map(food => (
+                        <li>
+                            <div key={food.id}>
+                                <div className={styles.foodInfo}>
+                                    <div>
+                                        {food.name}
+                                        <span className={styles.brandName}>{food.brand != null ? food.brand : ""}</span>
+                                    </div>
 
-                {foods.map(food => (
-                    <div key={food.id}>
-                        {food.brand != null ? `${food.name} - ${food.brand},` : `${food.name},`} {food.servingSize} {food.servingUnit} | {food.calories} kcal - {food.protein} P - {food.fat} F - {food.carbs} C <Button size="sm" variant="danger" onClick={() => handleFoodDeletion(food)}> Delete </Button>
-                    </div>
+                                    <div className={styles.nutrientInfo}>
+                                        {food.calories} kcal
 
-                ))}
+                                    </div>
+                                    <div>
+                                        <span className={styles.macroInfo}>Protein: {food.protein} g</span>
+                                        <span className={styles.macroInfo}>Fat: {food.fat} g</span>
+                                        <span className={styles.macroInfo}>Carbs: {food.carbs} g</span>
+                                    </div>
+                                </div>
+                                <Button className={styles.foodDeleteBtn} size="sm" variant="danger" onClick={() => handleFoodDeletion(food)}> Delete </Button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
             </div>
 
         </div>

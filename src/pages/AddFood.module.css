@@ -33,3 +33,59 @@
     text-align: center;
     margin-top: 15px;
 }
+
+
+.foodDbMsg {
+    text-align: center;
+    font-size: x-large;
+    margin-top: 25px;
+}
+
+
+.foodList {
+    padding: none;
+    list-style: none;
+}
+
+.foodList li {
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 500px;
+}
+
+.foodList li div {
+    display: flex;
+
+}
+
+.foodInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.brandName {
+    font-size: small;
+    color: #777;
+    margin-left: 5px;
+}
+
+.nutrientInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.macroInfo {
+    font-size: small;
+    color: #777;
+    margin-right: 10px;
+}
+
+.foodDeleteBtn {
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 30px;
+}
