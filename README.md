@@ -1,9 +1,7 @@
 # Local Calorie Counter
 
-A calorie counter that runs completely locally on your computer.
+A calorie counter that runs locally on your browser. You add your own foods and specify its nutrients yourself, thus ensuring that the nutritional data is correct.
 
-Features the following:
-- No erroneous data by other users (you add all foods yourself)
-- No registering an account
-- No bloating like suggested workouts and exercise routines
-- Minimalistic design
+You can then construct your own food log/diary which will tally up the total calorie and macronutrient count.
+
+Includes the ability to import and export your data in case you need to transfer it to another device.
