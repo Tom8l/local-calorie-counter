@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 import { Home } from './pages/Home';
 import { AddEntry } from './pages/AddEntry';
 import { AddFood } from './pages/AddFood';
@@ -14,7 +14,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <NavMenu onEntriesImported={handleEntriesImported} />
 
       <Routes>
@@ -22,7 +22,7 @@ function App() {
         <Route path="/add-entry" element={<AddEntry />} />
         <Route path="/add-food" element={<AddFood />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
