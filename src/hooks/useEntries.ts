@@ -13,7 +13,7 @@ export function useEntries(date: string, entriesVersion: number) {
         }
 
         loadEntries();
-    }, [date, reloadKey]);
+    }, [date, reloadKey, entriesVersion]);
 
     const reloadEntries = () => {
         setReloadKey(value => value + 1);

@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Food } from "../types";
-import { getFoods } from "../db/foods";
 import { addEntry } from "../db/entries";
 import { generateDate, shiftDateString } from "../utils/date";
 import { useFoods } from "../hooks/useFoods";
@@ -14,7 +13,7 @@ import { Button } from "../components/Button";
 export function AddEntry() {
     const location = useLocation();
     const [date, setDate] = useState<string>(location.state?.date ?? generateDate(0));
-    const {foods, reloadFoods} = useFoods();
+    const {foods} = useFoods();
     const navigate = useNavigate();
 
     const [servings, setServings] = useState<Record<string, number>>({});
@@ -60,10 +59,6 @@ export function AddEntry() {
         setDate(newDateString);
     }
 
-    const handleTodayButton = () => {
-        setDate(generateDate(0));
-    }
-
     return (
         <>
 
@@ -82,8 +77,8 @@ export function AddEntry() {
                 <div>
                     <ul className={styles.foodList}>
                     {foods.map(food => (
-                        <li>
-                            <div key={food.id} className={styles.foodEntry}>
+                        <li key={food.id}>
+                            <div className={styles.foodEntry}>
 
                                 <div className={styles.foodNameAndBrand}>
                                     <div>{food.name}</div>
@@ -97,6 +92,7 @@ export function AddEntry() {
                                     </div>
 
                                     <input
+                                        name="servingInput"
                                         className={styles.foodListInput}
                                         type="number"
                                         min="0.25"

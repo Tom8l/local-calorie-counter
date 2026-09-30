@@ -70,43 +70,43 @@ export function AddFood() {
 
             <form onSubmit={handleSubmit} className={styles.foodForm}>
 
-                <div> Food Form </div>
+                <div> Add Food </div>
 
                 <div>
-                    <label>Name *</label>
-                    <input name="name"></input>
+                    <label htmlFor="nameInput">Name *</label>
+                    <input id="nameInput" name="name"></input>
                 </div>
                 <div>
-                    <label>Brand</label>
-                    <input name="brand"></input>
+                    <label htmlFor="brandInput">Brand</label>
+                    <input id="brandInput" name="brand"></input>
                 </div>
                 <div>
-                    <label>Serving Unit</label>
-                    <select name="servingUnit">
+                    <label htmlFor="servingUnitInput">Serving Unit</label>
+                    <select id="servingUnitInput" name="servingUnit">
                         <option>g</option>
                         <option>ml</option>
                         <option>piece</option>
                     </select>
                 </div>
                 <div>
-                    <label>Serving Size</label>
-                    <input name="servingSize"></input>
+                    <label htmlFor="servingSizeInput">Serving Size</label>
+                    <input id="servingSizeInput" name="servingSize"></input>
                 </div>
                 <div>
-                    <label>Calories (kcal)</label>
-                    <input name="calories"></input>
+                    <label htmlFor="caloriesInput">Calories (kcal)</label>
+                    <input id="caloriesInput" name="calories"></input>
                 </div>
                 <div>
-                    <label>Protein (g)</label>
-                    <input name="protein"></input>
+                    <label htmlFor="proteinInput">Protein (g)</label>
+                    <input id="proteinInput" name="protein"></input>
                 </div>
                 <div>
-                    <label>Fat (g)</label>
-                    <input name="fat"></input>
+                    <label htmlFor="fatInput">Fat (g)</label>
+                    <input id="fatInput" name="fat"></input>
                 </div>
                 <div>
-                    <label>Carbs (g)</label>
-                    <input name="carbs"></input>
+                    <label htmlFor="carbsInput">Carbs (g)</label>
+                    <input id="carbsInput" name="carbs"></input>
                 </div>
 
                 <div>
@@ -120,12 +120,12 @@ export function AddFood() {
                 <ul className={styles.foodList}>
                     
                     {foods.map(food => (
-                        <li>
-                            <div key={food.id}>
+                        <li key={food.id}>
+                            <div>
                                 <div className={styles.foodInfo}>
                                     <div>
                                         {food.name}
-                                        <span className={styles.brandName}>{food.brand != null ? food.brand : ""}</span>
+                                        <div className={styles.brandName}>{food.brand != null ? food.brand : ""}</div>
                                     </div>
 
                                     <div className={styles.nutrientInfo}>

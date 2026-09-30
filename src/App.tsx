@@ -1,6 +1,4 @@
 import './App.css'
-import { useEntries } from "./hooks/useEntries";
-import { DBTest2 } from './components/DBTest';
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Home } from './pages/Home';
 import { AddEntry } from './pages/AddEntry';

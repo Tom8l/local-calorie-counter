@@ -57,13 +57,13 @@
 
 .foodList li div {
     display: flex;
-
+    align-items: baseline;
 }
 
 .foodInfo {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    gap: 1px;
 }
 
 .brandName {

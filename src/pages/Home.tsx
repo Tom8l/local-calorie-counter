@@ -3,7 +3,7 @@ import { generateDate, shiftDateString } from "../utils/date";
 import { useEntries } from "../hooks/useEntries";
 import { Link } from "react-router";
 import type { Entry } from "../types";
-import { deleteEntry, exportEntries, importEntries } from "../db/entries";
+import { deleteEntry } from "../db/entries";
 import { useRef, useState } from "react";
 import leftArrowIcon from "../assets/left-arrow-svgrepo.svg";
 import rightArrowIcon from "../assets/right-arrow-svgrepo.svg";
@@ -59,10 +59,6 @@ export function Home({ entriesVersion }: HomeProps) {
     const handleNextDate = () => {
         const newDateString = shiftDateString(date, 1);
         setDate(newDateString);
-    }
-
-    const handleTodayButton = () => {
-        setDate(generateDate(0));
     }
 
     return (
@@ -131,8 +127,8 @@ export function Home({ entriesVersion }: HomeProps) {
                 No diary entries yet. Click "Add Entry" above to get started!
               </li>) :
             (entries.map(entry => (
-              <li>
-                <div key={entry.id}>
+              <li key={entry.id}>
+                <div>
                   <div className={styles.entryDetails}>
                     <strong>{entry.foodName}</strong>
                     <div>

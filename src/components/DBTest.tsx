@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { dbPromise } from "../db/database.ts";
-import { resetDatabase } from '../db/reset'
 
 export default function DBTest() {
     useEffect(() => {
